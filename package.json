@@ -1,15 +1,12 @@
 {
   "name": "blogging_api",
   "version": "1.0.0",
-  "engines": {
-    "node": ">=16.0.0."
-  },
   "description": "Blog Api",
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start:dev": "nodemon app.js"
+    "dev": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Sarki",
   "license": "ISC",
@@ -40,5 +37,8 @@
     "jest": "^29.7.0",
     "merd": "^0.0.4",
     "supertest": "^6.3.3"
+  },
+  "engines": {
+    "node": ">=14.20.1."
   }
 }
