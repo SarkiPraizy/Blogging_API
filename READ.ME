@@ -1,0 +1,207 @@
+# BLOGGING API
+
+This is an api for a blog app.This API allows you to create, read, update, and delete blog posts, manage user accounts, and perform various operations related to blogging. This API provides the tools you need to manage your content effectively.
+
+---
+
+## Requirements
+1. Users should have a first_name, last_name, email, password, (you can add other
+attributes you want to store about the user)
+2. A user should be able to sign up and sign in into the blog app
+3. Use JWT as authentication strategy and expire the token after 1 hour
+4. A blog can be in two states; draft and published
+5. Logged in and not logged in users should be able to get a list of published blogs
+created
+6. Logged in and not logged in users should be able to to get a published blog
+7. Logged in users should be able to create a blog.
+8. When a blog is created, it is in draft state
+9. The owner of the blog should be able to update the state of the blog to published
+10. The owner of a blog should be able to edit the blog in draft or published state
+11. The owner of the blog should be able to delete the blog in draft or published
+state
+12.The owner of the blog should be able to get a list of their blogs.
+a. The endpoint should be paginated
+b. It should be filterable by state
+13.Blogs created should have title, description, tags, author, timestamp, state,
+read_count, reading_time and body.
+14.The list of blogs endpoint that can be accessed by both logged in and not logged
+in users should be paginated,
+a. default it to 20 blogs per page.
+b. It should also be searchable by author, title and tags.
+c. It should also be orderable by read_count, reading_time and timestamp
+15.When a single blog is requested, the api should return the user information(the
+author) with the blog. The read_count of the blog too should be updated by 1
+16.Come up with any algorithm for calculating the reading_time of the blog.
+17.Write tests for all endpoints
+18.Create an ERD for entities and show relationships
+19.Use Winston and ensure functions and process are logged.
+
+
+## SETUP
+- Install NodeJS, mongodb
+- create a folder called Blogging_Api
+- pull this repo
+- update env with example.env
+- run `npm start`
+
+----
+
+## BASE URL
+-
+-https://drawsql.app/teams/sarkis/diagrams/blogging-api (ERD diagrams)
+
+## MODELS
+
+---
+
+### User
+
+| field     | data_type | constraints                                      |whitespace
+| --------- | --------- | ------------------------------------------------ |----------------------------
+| email     | string    | required                                         | No
+| first_name| string    | required                                         | Yes
+| last_name | string    | required                                         | Yes
+| email     | string    | required                                         | Yes
+| password  | string    | required                                         | No
+
+
+
+### Blog
+
+| field      | data_type | constraints                                      |whitespace
+| ---------  | --------- | ------------------------------------------------ |----------------------------
+| title      | string    | required                                         | No
+| description| string    | required                                         | Yes
+| author     | string    | required                                         | Yes
+| state      | string    | required                                         | Yes
+| body       | string    | required                                         | No
+| tags       | string    | required                                         | No  
+
+
+##APIs
+
+---
+
+### Signup User
+
+-Route:/signup
+-Method: POST 
+-Body:
+
+```
+{
+    "first_name": "Sarki",
+    "last_name": "Praise",
+    "email": "king@gmail.com",
+    "password": "test01",
+    "confirmPassword": "test01"
+}
+```
+
+-Response
+
+```
+{
+    "message": "Signup successfull",
+    "user": {
+        "first_name": "Sarki",
+        "last_name": "Praise",
+        "email": "king@gmail.com",
+        "_id": "653ea138a60d5f1964889535",
+        "__v": 0
+    },
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1M2VhMTM4YTYwZDVmMTk2NDg4OTUzNSIsImlhdCI6MTY5ODYwMzMyMSwiZXhwIjoxNjk4NjA2OTIxfQ.OIt9RF30HkKtfCtcR5HOlUcKuVuHox4fpVfOa7yldto"
+}
+
+
+---
+
+### Signin User
+
+-Route: /Signin
+-Method: POST
+-Body:
+
+```
+{
+    "email": "king@gmail.com",
+    "password": "test01"
+}
+
+```
+
+- Response
+
+```
+
+{
+    "status": "success",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1M2VhMTM4YTYwZDVmMTk2NDg4OTUzNSIsImlhdCI6MTY5ODYwMzgxOCwiZXhwIjoxNjk4NjA3NDE4fQ.KAnr2gk1DOHvDWABcd5gyxIDKLKLy6rkf5DtngYL980",
+    "user": {
+        "_id": "653ea138a60d5f1964889535",
+        "first_name": "Sarki",
+        "last_name": "Praise",
+        "email": "king@gmail.com",
+        "__v": 0
+    }
+}
+
+---
+
+### Create Blog
+
+-Route: /create
+-Method: POST
+-Body:
+
+```
+
+{
+    "title": "King",
+    "description": "Goat talk",
+    "body": "King Kendrick lamar is the GOAT!😎",
+    "tags":"Hip-Hop"
+}
+
+```
+
+-Response
+
+```
+{
+    "status": "success",
+    "messsge": "A new blog has been created",
+    "newBlog": {
+        "title": "King",
+        "description": "Goat talk",
+        "author": "653ea138a60d5f1964889535",
+        "state": "draft",
+        "read_count": 0,
+        "reading_time": "0.045 minute read",
+        "tags": [
+            "Hip-Hop"
+],
+        "body": "King Kendrick lamar is the GOAT!😎",
+        "timestamp": "2023-10-29T18:14:51.322Z",
+        "_id": "653eacbca60d5f196488953c",
+        "__v": 0
+    }
+}
+
+```
+
+---
+
+### Get Blogging_Api
+
+-Route: /blog
+-Method: Get
+-Header
+    -Authorization: Bearer {token}
+    
+
+
+
+
+
+
