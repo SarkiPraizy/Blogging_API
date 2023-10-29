@@ -1,3 +1,4 @@
+require('dotenv').config()
 const express = require('express');
 const path = require('path')
 const mongoose = require('mongoose');
@@ -6,10 +7,9 @@ const { connectToDatabase, closeDatabaseConnection } = require( './db');
 
 const blogRouter = require("./routes/blogRouter");
 const auth_router = require("./routes/authRouter")
-require('dotenv').config()
 
 const app = express();
-const PORT = 7000;
+const PORT = 8000;
 const HOSTNAME = 'localhost'
 
 app.use(bodyParser.json());
