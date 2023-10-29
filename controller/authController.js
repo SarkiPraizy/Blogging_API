@@ -88,8 +88,7 @@ exports.signin = async function (req, res, next) {
       const error = new Error("Username or password is incorrect");
       return next(error);
     }
-    // check if user exist && password is correct
-
+    // checking if user exist && password is correct
     const user = await userModel.findOne({ email });
     if (!user || !(await user.comparePassword(password, user.password))) {
       console.log(typeof password, typeof user.password)
