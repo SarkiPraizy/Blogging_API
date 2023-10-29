@@ -80,7 +80,6 @@ exports.signup = async function (req, res, next) {
 };
 
 // SIGIN CONTROLLER ROUTE
-
 exports.signin = async function (req, res, next) {
   try {
     const { email, password } = req.body;
