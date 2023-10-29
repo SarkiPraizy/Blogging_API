@@ -10,7 +10,7 @@ const auth_router = require("./routes/authRouter")
 
 const app = express();
 const PORT = 8000;
-const HOSTNAME = 'localhost'
+const HOSTNAME = '0.0.0.0';
 
 app.use(bodyParser.json());
 app.use("/", auth_router)
