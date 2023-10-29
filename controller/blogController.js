@@ -5,7 +5,6 @@ exports.createBlog = async function (req, res, next) {
   try {
     const blogBody = req.body;
     blogBody.author = req.user._id
-    console.log(req.user)
     const blogReadingTime = function () {
       const blogLenght =
         blogBody.body.split(" ").length +
@@ -28,8 +27,7 @@ exports.createBlog = async function (req, res, next) {
 };
 exports.getAllBlogs = async function (req, res, next) {
   try {
-    console.log("get")
-    const filterBlog = { state: "draft" };
+    const filterBlog = { state: "publish" };
     const queryObj = { ...req.query };
     let blogQuery = blog.find(filterBlog);
 
@@ -37,7 +35,6 @@ exports.getAllBlogs = async function (req, res, next) {
     //sorting read_count, reading_time and timestamp
     if (req.query.sort) {
       const searchBy = req.query.sort.split(",").join(" ");
-      console.log(searchBy)
       blogQuery = blogQuery.sort(searchBy);
     } else {
       blogQuery.sort({ timestamp: -1 });
@@ -142,3 +139,40 @@ exports.deleteblog = async function (req, res, next) {
     next(error);
   }
 };
+
+exports.publishBlog = async (req, res, next) => {
+  try {
+    // Uncomment this section if needed
+    // if (!req.user.active === true) {
+    //   return next(new Error('You are not authorized. Kindly sign up or login'));
+    // }
+
+    const blogId = req.params.blogId;
+    const publishBlog = await blog.findById(blogId);
+
+    if (!publishBlog) {
+      return res.status(404).json({
+        error: 'Blog not found',
+      });
+    }
+
+    if (publishBlog.author === req.user._id) {
+      publishBlog.state = "published";
+      await publishBlog.save();
+
+      return res.status(200).json({
+        result: 'SUCCESS',
+        message: 'Blog has been published successfully',
+        publishBlog,
+      });
+    } else {
+      return res.status(403).json({
+        error: 'You are not authorized to publish this blog',
+      });
+    }
+  } catch (error) {
+    next(error);
+  }
+};
+
+

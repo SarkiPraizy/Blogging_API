@@ -52,7 +52,7 @@ exports.signup = async function (req, res, next) {
     const { email, first_name, last_name, password, confirmPassword } =
       req.body;
 
-    console.log(req.body);
+   
 
     if (password !== confirmPassword) {
       const error = new Error("password does not match");
@@ -91,7 +91,7 @@ exports.signin = async function (req, res, next) {
     // checking if user exist && password is correct
     const user = await userModel.findOne({ email });
     if (!user || !(await user.comparePassword(password, user.password))) {
-      console.log(typeof password, typeof user.password)
+
       const error = new Error("Incorrect email or password");
       return next(error);
     }

@@ -33,4 +33,8 @@ blogRouter.delete(
   blogController.deleteblog
 );
 
+blogRouter.patch(
+  "/publishBlog/:blogId", isAuthenticated, 
+blogController.publishBlog);
+
 module.exports = blogRouter;

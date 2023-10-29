@@ -12,7 +12,7 @@ passport.use(
       jwtFromRequest: ExtractJWt.fromAuthHeaderAsBearerToken(),
     },
     async (payload, done) => {
-        console.log(req.user, "happy")
+        
       try {
         return done(null, payload.user); // req.user = payload.user
       } catch (error) {

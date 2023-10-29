@@ -6,7 +6,6 @@ const blogValidationMiddleware = async (req, res, next) => {
     await blogSchema.validateAsync(req.body);
     next();
   } catch (error) {
-    console.log("HERE", error);
     return res.status(406).send(error.details[0].message);
     // return res.status(406).send(error.details[0].message);
   }

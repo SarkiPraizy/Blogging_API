@@ -14,7 +14,6 @@ exports.getAllUsers = async function (req, res, next) {
 exports.getUserById = async function (req, res, next) {
   try {
     const { userId } = req.params;
-    console.log(userId);
     const user = await User.findById(userId);
 
     if (!user) {
@@ -36,11 +35,9 @@ exports.updateUser = async function (req, res, next) {
       new: true,
       runValidators: true,
     });
-    // console.log(user);
     if (!user) {
       return res.status(404).json({ status: false, order: null });
     }
-    console.log(user);
     await User.findByIdAndUpdate(user, userDetails, {
       runValidators: true, // Runs validations for the updated fields
     });
@@ -53,7 +50,6 @@ exports.updateUser = async function (req, res, next) {
 
 exports.deleteUser = async function (req, res, next) {
   try {
-    console.log(req.params);
     const { userId } = req.params;
 
     const user = await User.deleteOne({ _id: userId });
