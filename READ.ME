@@ -201,6 +201,80 @@ author) with the blog. The read_count of the blog too should be updated by 1
  - Responses : "the GET blog will only get the published blogs,no publishedblog thats why we have an empty array
 
 
+ ```
+
+{
+    "status": "success",
+    "blogList": 0,
+    "Blogs": []
+}
+
+```
+
+---
+
+### Get blog by Id
+
+-Route: /blogs/blogId
+-Method: GET
+-Header:
+  - Authorization: Bearer {token}
+- Query params:
+  - page (default: 1)
+  - per_page (default: 20)
+  - order_by (default: created_at)
+  - order (options: asc | desc, default: timestamp)
+  - state
+  - created_at
+
+-Response
+
+success
+
+```
+
+{
+    "status": "success",
+    "Blog": {
+        "_id": "653eacbca60d5f196488953c",
+        "title": "King",
+        "description": "Goat talk",
+        "author": {
+            "_id": "653ea138a60d5f1964889535",
+            "first_name": "Sarki",
+            "last_name": "Praise",
+            "email": "king@gmail.com",
+            "password": "$2b$12$Fk3WALfOqgMkqc7LxVOkDuUuIlsnjXJspFTEx0jsqOWGLn9cyLAz.",
+            "__v": 0
+        },
+        "state": "draft",
+        "read_count": 1,
+        "reading_time": "0.045 minute read",
+        "tags": [
+            "Hip-Hop"
+        ],
+        "body": "King Kendrick lamar is the GOAT!😎",
+        "timestamp": "2023-10-29T18:14:51.322Z",
+        "__v": 0
+    }
+}
+
+```
+
+---
+
+...
+
+##CREATOR
+
+-Praise Ibu
+
+```
+
+```
+
+
+
 
 
 
