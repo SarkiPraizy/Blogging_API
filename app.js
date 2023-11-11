@@ -25,46 +25,46 @@ mongoose.connect(process.env.MONGODB_URL, { useNewUrlParser: true, useUnifiedTop
 //connect to databse when the application starts
 connectToDatabase();
 
-// Article schema
-const blogSchema = new mongoose.Schema({
+// // Blog schema
+// const blogSchema = new mongoose.Schema({
 
-  title: String,
-  content: String,
-  author: String, // You can reference the User model here
-  state: { type: String, enum: ['draft', 'published'], default: 'draft' },
-  read_count: { type: Number, default: 0 },
-  reading_time: { type: Number, default: 0 },
-  tags: [String],
-  body: String,
-  timestamp: { type: Date, default: Date.now },
-});
+//   title: String,
+//   content: String,
+//   author: String, // You can reference the User model here
+//   state: { type: String, enum: ['draft', 'published'], default: 'draft' },
+//   read_count: { type: Number, default: 0 },
+//   reading_time: { type: Number, default: 0 },
+//   tags: [String],
+//   body: String,
+//   timestamp: { type: Date, default: Date.now },
+// });
 
-const blog = mongoose.model('blog', blogSchema);
+// const blog = mongoose.model('blog', blogSchema);
 
 
-// Create a new blog
-app.post('/blog', (req, res) => {
-  const newBlog = new blog(req.body);
+// // Creating a new blog
+// app.use('/blog', (req, res) => {
+//   const newBlog = new blog(req.body);
 
-  newBlog.save((err, blog) => {
-    if (err) {
-      res.status(400).send(err);
-    } else {
-      res.status(201).json(blog);
-    }
-  });
-});
+//   newBlog.save((err, blog) => {
+//     if (err) {
+//       res.status(400).send(err);
+//     } else {
+//       res.status(201).json(blog);
+//     }
+//   });
+// });
 
-// Retrieve all blogs
-app.get('/blog', (req, res) => {
-  blog.find({}, (err, blog) => {
-    if (err) {
-      res.status(500).send(err);
-    } else {
-      res.status(200).json(blog);
-    }
-  });
-});
+// // Retrieving all blogs
+// app.use('/blog', (req, res) => {
+//   blog.find({}, (err, blog) => {
+//     if (err) {
+//       res.status(500).send(err);
+//     } else {
+//       res.status(200).json(blog);
+//     }
+//   });
+// });
 
 app.listen(PORT, HOSTNAME, () => {
   console.log(`Server is running on port ${PORT}`);

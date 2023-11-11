@@ -27,7 +27,7 @@ exports.createBlog = async function (req, res, next) {
 };
 exports.getAllBlogs = async function (req, res, next) {
   try {
-    const filterBlog = { state: "publish" };
+    const filterBlog = { state: "published" };
     const queryObj = { ...req.query };
     let blogQuery = blog.find(filterBlog);
 
