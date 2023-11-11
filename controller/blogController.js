@@ -134,7 +134,7 @@ exports.deleteblog = async function (req, res, next) {
       const error = new Error("No blog found with that ID");
       return next(error);
     }
-    return res.status(204).json({ messsge: "deletion succesful" });
+    return res.json({ messsge: "deletion succesful" });
   } catch (error) {
     next(error);
   }
